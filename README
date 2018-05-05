@@ -1,0 +1,115 @@
+			      D C A L C
+			      =========
+
+			          by
+
+ 		              Bob Hepple
+
+Note: to build (on Linux - on other systems you may need to tweak the
+Makefile):
+
+make
+strip dcalc
+cp dcalc /usr/local/bin
+
+What is it?
+===========
+
+This file describes  the (old) curses   dcalc.  Look for  gdcalc for a
+GNOME gui version.
+
+DCALC  is  a (fairly)  portable, character based   implementation of a
+Reverse Polish  Notation calculator as popularised by Hewlett-Packard.
+I wrote it because I  thought it stupid  to sit at a $100,000 computer
+whirring away at X Mips and  Y Mflops (or even  at my home PC) and yet
+still need  to rumage about for a  physical calculator  to work out my
+mortgage  or Hex to decimal  conversions (yes, I  know  about 'dc' and
+'bc' but who wants to  use them?  Oh  yes, I  nearly  forgot - I  hate
+calculators (or calculator programs) with an '=' sign on them.
+
+Who is it designed for?
+
+Anyone who  likes   RPN/stack  calculators    and   needs   statistic,
+scientific, financial and number-base conversion functions.
+
+I had a  lot of   fun building    DCALC, but I   am not  so   keen  on
+documentation so I won't  try  to explain the  workings  of  RPN. Look
+elsewhere!!
+
+CALC is a very simple program to add  numbers  found on stdin. Invoked
+with argument +, -, * or / calc uses the  appropriate argument instead
+of +.
+
+calc.el is intended to allow emacs to add up a region in emacs.
+
+Running DCALC.
+==============
+
+Under  UNIX, DCALC  just runs  as a normal  text-based  program  under
+(System V) curses. Just make sure the termcap  entry for your terminal
+can support function keys.
+
+Using DCALC
+===========
+
+There is a pop-up help  window available  once DCALC is running - just
+toggle it on and off by pressing 'H' or F8.
+
+Since   Unix terminals  and the  PC  lack the  specialised keys   of a
+calculator, there is a mapping of keyboard to function -  see the help
+window for details. For example, the CHS (change sign) function of the
+calculator   is  carried out  by the ','   key on the terminal  or  PC
+keyboard.  What the heck - I wasn't using ',' for anything else!
+
+There are some  small differences in  keyboard mapping between  the PC
+and Unix implementations  since  not  all   (Unix) terminals can    be
+guaranteed to have 'PgUp' 'PgDn' and 'Del' buttons.   Also, to exit in
+Unix, use ^D (Control-D) or q rather than ESCAPE. Sigh. I have assumed
+that the terminal  has a termcap  entry with at  least 8 function keys
+(k1, k2, ...  k8 in TERMCAP). Just in case, you  can use control w e r
+t y   u i or  o in  place  of f1-f8 -  but  beware: if  you don't have
+function keys there is no way to exit 'ASCII' mode!
+
+One advantage that DCALC has  over an  ordinary calculator is that you
+can  see all the  registers.  Just press '@'  to  toggle the  register
+window on and off.
+
+Another advantage is  that you don't need  to buy three calculators to
+get the main  scientific,  financial  and computer  science functions.
+
+Yet  another advantage is that the  display  can show ASCII characters
+and  do  ASCII to   DECIMAL/OCTAL etc conversions.  There  is a slight
+difference between the PC and Unix versions in that the PC version can
+display control codes  as well as ordinary  characters.  Unix versions
+embolden ASCII values over 127 (bit 8 set).
+
+Some programming notes.
+=======================
+
+The code is not very clever - a fast hack really.  The main calculator
+engine  is in 'dcalc.c' -  this is pretty   well platform independent.
+
+Unix  versions need to compile-in 'curse.c'.   
+
+As of 1999.2.3, the only version supported is Linux, but other Unix
+systems will be easy to compile.
+
+KNOWN BUGS:
+===========
+
+There are always bugs.
+
+DCALC depends on having a decent termcap/terminfo entry with function
+keys that work properly.
+
+Bob Hepple
+
+bhepple@freeshell.org
+
+Wed Jun 26 1991
+Tue Jan 21 1992
+Wed Oct 20 1993 - added Linux and ncurses support
+Wed Feb 03 1999 - re-released for Linux with GPL
+Wed Mar 08 2000 - fixed bug in interest calculation
+Mon Apr 24 2000 - gtk version, added conversions via units(1), .dcalcrc file
+Wed Jul 19 2002 - merge with gdcalc
